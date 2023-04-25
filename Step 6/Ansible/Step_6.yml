@@ -1,0 +1,46 @@
+- hosts: nodes
+  become: true
+
+  tasks:
+
+  # #Downloading mySQL image
+  #   - name: Download mySQL image
+  #     command: docker pull mysql:5.7.42-debian
+
+  #Downloading Task Manager App 
+    - name: Download app image
+      command: docker pull iaziogas/app:latest
+
+
+  
+  # #Creating subnetwork on docker
+  #   - name: Create a network
+  #     command: docker network create -d bridge network_team_1
+
+  # #Creating a container for the database
+  #   - name: Create the database
+  #     command: docker run -d --network=network_team_1 -e MYSQL_ROOT_PASSWORD=root --name mySQL_DB mysql:5.7.42-debian
+    
+#Obtaining the ip adress of the database
+  # - name: Obtaining database IP address
+  #   shell: docker inspect --format '{''{ .NetworkSettings.Networks.network_team_1.IPAddress }''}' mySQL_DB
+  #   register: ip_address
+
+
+
+  #Checking if a container is already running
+    - name: get container status
+      shell: docker ps -a -f name=team_1_app --format {%raw%}"table {{.Status}}"{%endraw%} | awk 'FNR == 2 {print}' | awk '{print $1}'
+      register: status
+  
+  #Deleting previous container
+    - name: Delete outdated container 
+      command: docker {{ item }} team_1_app
+      with_items: 
+      - stop
+      - rm
+      when: status.stdout == "Up"
+
+  #Creating a container for the app
+    - name: Start the app 
+      command: "docker run -d -e DB_HOST=team1db.mysql.database.azure.com -e DB_USER=testadmin -e DB_USER_PASSWORD=DevOps2023! --network=network_team_1 -p 8080:8080 --name team_1_app iaziogas/app:latest"

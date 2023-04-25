@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    
+    environment {
+    MY_CRED = credentials('0bea2745-2a48-4a1c-b82b-615c6a52d2c4')
+    }
+
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/IASON-ZG/VM-Deployment.git'
+            }
+        }
+        stage('Loging in to azure'){
+            steps{
+                sh 'az login --service-principal -u $MY_CRED_CLIENT_ID -p $MY_CRED_CLIENT_SECRET -t $MY_CRED_TENANT_ID'
+            }
+        }
+        stage('Terraform init'){
+             steps{
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform apply'){
+            steps{
+                sh 'terraform plan'
+                sh 'terraform apply -auto-approve'
+            }
+        }
+    
+    }
+}

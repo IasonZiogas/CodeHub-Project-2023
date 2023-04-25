@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/IASON-ZG/Ansible-Playbook.git'
+            }
+        }
+        stage('Executing playbook'){
+             steps{
+                sh 'ansible-playbook -e "ansible_python_interpreter=/usr/bin/python3" Step_6.yml'
+            }
+        }
+    }
+}
