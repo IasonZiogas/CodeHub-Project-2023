@@ -1,5 +1,11 @@
 # CodeHub Project on Cyber Security and DevOps 2023
   
+## To Access the VM running jenkins : 
+- 20.16.237.37:8080
+- Username : Admin
+- Password : DevOps2023!
+
+
 ## Step 1:
 
 ### Using the infrastructure as code model we used terraform to define the resources we needed for our project which were:
