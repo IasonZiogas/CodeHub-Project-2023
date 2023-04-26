@@ -5,6 +5,9 @@
 - Username : Admin
 - Password : DevOps2023!
 
+## Repositories used : 
+- https://github.com/IASON-ZG/VM-Deployment (Used in Step 5)
+- https://github.com/IASON-ZG/Ansible-Playbook (Used in Step 6)
 
 ## Step 1:
 
@@ -80,9 +83,27 @@ Lastly we configurated a webhook so whenever the Terraform code was updated the 
 
 ![Step-5-Webhook](READMEassets/webhook.PNG "Step-5-Webhook")
 
-In order for our VM to have access to azure securely we created a service principal. A role per say in our resource group with limited permissions.
+In order for our VM to have access to azure securely we created a service principal. A role per say in our resource group with limited permissions with this command :
+- az ad sp create-for-rbac --name JenkinsServicePrincipal --role b24988ac-6180-42a0-ab88-20f7382dd24c --scopes /subscriptions/139a319c-df00-476d-9252-94623e31323f/resourceGroups/Regen-Project-codehub-reg
 
+Where if we break the command down it says :
+- Name of the service principal : JenkinsServicePrincipal
+- The role of the principal : Contributor ( whose code is : b24988ac-6180-42a0-ab88-20f7382dd24c )
+- The scope of the principal which is our resource group : Regen-Project-codehub-reg
 
+This command creates a profile like this : 
+
+![Service Principal Result](READMEassets/service-principal-command.PNG "Service-principal-result")
+
+And on our azure resource group :
+
+![Service Principal](READMEassets/service-principal.PNG "Service-principal")
+
+Then we install the azure plugin on our jenkins VM and in the manage credentials section we add our service principal : 
+
+![Service Principal on Jenkins](READMEassets/jenkins-service-principal.PNG "Service-principal-Jenkins")
+
+Now the VM can access our azure resource group without worrying for any unintended changes and losing our credentials.
 
 ## Step 6 : 
  
