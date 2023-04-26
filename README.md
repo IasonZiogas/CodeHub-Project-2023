@@ -100,7 +100,7 @@ We had to configurate the container to connect with remote database server on az
 
 And the result : 
 
-![Step-6-result](READMEassets/Step_6_result.PNG "Step-6-result")
+![Step-6-result](READMEassets/step_6_result.PNG "Step-6-result")
 
 
 And the app is up and running (http://team1app.westeurope.cloudapp.azure.com:8080/): 
