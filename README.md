@@ -20,8 +20,10 @@
 - Virtual machine
 - Scurity Group (to control the traffic of our VM)
 - Public IP (to be able to access our VM)
+
+![Initial-Resource-Group](READMEassets/resource-group-1.PNG "Initial resource group")
   
-The commands used where :
+The commands used were :
 - terraform init
 - terraform plan 
 - terraform apply -auto-approve
@@ -147,3 +149,8 @@ The webhook works :
 The added stage : 
 
 ![building-Step-6](READMEassets/built-pipeline-6.PNG "building Step-6 pipeline")
+
+
+Final resource group : 
+
+![Resource-group](READMEassets/final-resource-group.PNG "Resource group in the end")
