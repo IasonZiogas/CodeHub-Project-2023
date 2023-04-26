@@ -80,6 +80,9 @@ Lastly we configurated a webhook so whenever the Terraform code was updated the 
 
 ![Step-5-Webhook](READMEassets/webhook.PNG "Step-5-Webhook")
 
+In order for our VM to have access to azure securely we created a service principal. A role per say in our resource group with limited permissions.
+
+
 
 ## Step 6 : 
  
