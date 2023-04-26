@@ -134,6 +134,8 @@ And the app is up and running (http://team1app.westeurope.cloudapp.azure.com:808
 
 ### *Disclaimer: Because we have created a database resource on azure there is no need for a mySQL container* 
 
+![Azure database](READMEassets/azure-db.PNG "azure-database")
+
 ## Step 7 : 
 
 For this step we had to add 2 things. Firstly a webhook on pipeline Step-4 so whenever the java files changed then a new docker image would be created and published. And secondly we added a new stage in the script of pipeline Step-4 so whenever the new image is published pipeline Step-6 will start building so it would build a new container with the updated app image.
